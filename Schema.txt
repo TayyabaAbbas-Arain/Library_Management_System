@@ -1,0 +1,288 @@
+create database library;
+
+CREATE TABLE Book (
+    ISBN VARCHAR(20) PRIMARY KEY,
+    AuthNo INT,
+    Title VARCHAR(255),
+    Edition INT,
+    Category VARCHAR(100),
+    Price DECIMAL(10, 2),
+    PublisherID INT,
+    FOREIGN KEY (PublisherID) REFERENCES Publisher(PublisherID)
+);
+
+CREATE TABLE Reader (
+    UserID INT PRIMARY KEY,
+    Email VARCHAR(255) not null,
+    Address VARCHAR(255),
+    FirstName VARCHAR(100),
+    LastName VARCHAR(100),
+    PhoneNo VARCHAR(20),
+    UNIQUE (Email)
+);
+
+CREATE TABLE Publisher (
+    PublisherID INT PRIMARY KEY,
+    YearOfPublication INT,
+    publisher_Name VARCHAR(100)
+);
+
+CREATE TABLE Auth_System (
+    LoginID INT PRIMARY KEY,
+    Password VARCHAR(100)
+);
+
+CREATE TABLE Reports (
+    RegNo INT PRIMARY KEY,
+    UserID INT,
+    BookISBN VARCHAR(20),
+    IssueDate DATE,
+    ReturnDate DATE,
+    FOREIGN KEY (UserID) REFERENCES Reader(UserID),
+    FOREIGN KEY (BookISBN) REFERENCES Book(ISBN)
+);
+
+CREATE TABLE Staff (
+    StaffID INT PRIMARY KEY,
+    Name VARCHAR(100)
+);
+
+CREATE TABLE Staff_Reader (
+    StaffID INT,
+    UserID INT,
+    PRIMARY KEY (StaffID, UserID),
+    FOREIGN KEY (StaffID) REFERENCES Staff(StaffID),
+    FOREIGN KEY (UserID) REFERENCES Reader(UserID)
+);
+
+CREATE TABLE Staff_Reports (
+    StaffID INT,
+    RegNo INT,
+    PRIMARY KEY (StaffID, RegNo),
+    FOREIGN KEY (StaffID) REFERENCES Staff(StaffID),
+    FOREIGN KEY (RegNo) REFERENCES Reports(RegNo)
+);
+
+CREATE TABLE Staff_Books (
+    StaffID INT,
+    ISBN VARCHAR(20),
+    PRIMARY KEY (StaffID, ISBN),
+    FOREIGN KEY (StaffID) REFERENCES Staff(StaffID),
+    FOREIGN KEY (ISBN) REFERENCES Book(ISBN)
+);
+
+CREATE TABLE Reserve_Return (
+    ReserveDate DATE,
+    DueDate DATE,
+    ReturnDate DATE,
+    UserID INT,
+    ISBN VARCHAR(20),
+    PRIMARY KEY (UserID, ISBN),
+    FOREIGN KEY (UserID) REFERENCES Reader(UserID),
+    FOREIGN KEY (ISBN) REFERENCES Book(ISBN)
+);
+create database libraray;
+
+CREATE TABLE Book (
+    ISBN VARCHAR(20) PRIMARY KEY,
+    AuthNo INT,
+    Title VARCHAR(255),
+    Edition INT,
+    Category VARCHAR(100),
+    Price DECIMAL(10, 2),
+    PublisherID INT,
+    FOREIGN KEY (PublisherID) REFERENCES Publisher(PublisherID)
+);
+
+CREATE TABLE Reader (
+    UserID INT PRIMARY KEY,
+    Email VARCHAR(255),
+    Address VARCHAR(255),
+    FirstName VARCHAR(100),
+    LastName VARCHAR(100),
+    PhoneNo VARCHAR(20),
+    UNIQUE (Email)
+);
+
+CREATE TABLE Publisher (
+    PublisherID INT PRIMARY KEY,
+    YearOfPublication INT,
+    publisher_Name VARCHAR(100)
+);
+
+CREATE TABLE Auth_System (
+    LoginID INT PRIMARY KEY,
+    Password VARCHAR(100)
+);
+
+CREATE TABLE Reports (
+    RegNo INT PRIMARY KEY,
+    UserID INT,
+    BookISBN VARCHAR(20),
+    IssueDate DATE,
+    ReturnDate DATE,
+    FOREIGN KEY (UserID) REFERENCES Reader(UserID),
+    FOREIGN KEY (BookISBN) REFERENCES Book(ISBN)
+);
+
+CREATE TABLE Staff (
+    StaffID INT PRIMARY KEY,
+    Name VARCHAR(100)
+);
+
+CREATE TABLE Staff_Reader (
+    StaffID INT,
+    UserID INT,
+    PRIMARY KEY (StaffID, UserID),
+    FOREIGN KEY (StaffID) REFERENCES Staff(StaffID),
+    FOREIGN KEY (UserID) REFERENCES Reader(UserID)
+);
+
+CREATE TABLE Staff_Reports (
+    StaffID INT,
+    RegNo INT,
+    PRIMARY KEY (StaffID, RegNo),
+    FOREIGN KEY (StaffID) REFERENCES Staff(StaffID),
+    FOREIGN KEY (RegNo) REFERENCES Reports(RegNo)
+);
+
+CREATE TABLE Staff_Books (
+    StaffID INT,
+    ISBN VARCHAR(20),
+    PRIMARY KEY (StaffID, ISBN),
+    FOREIGN KEY (StaffID) REFERENCES Staff(StaffID),
+    FOREIGN KEY (ISBN) REFERENCES Book(ISBN)
+);
+
+CREATE TABLE Reserve_Return (
+    ReserveDate DATE,
+    DueDate DATE,
+    ReturnDate DATE,
+    UserID INT,
+    ISBN VARCHAR(20),
+    PRIMARY KEY (UserID, ISBN),
+    FOREIGN KEY (UserID) REFERENCES Reader(UserID),
+    FOREIGN KEY (ISBN) REFERENCES Book(ISBN)
+);
+
+
+INSERT INTO Publisher (PublisherID, YearOfPublication, publisher_Name) VALUES
+(1, 2005, 'raza'),
+(2, 2010, 'Hadi'),
+(3, 2018, 'john'),
+(4, 2015, 'Paras'),
+(5, 2009, 'Wildan'),
+(6, 2013, 'Macmillan Publishers'),
+(7, 2011, 'Hashim'),
+(8, 2017, 'Saad'),
+(9, 2019, 'Bloomsbury Publishing'),
+(10, 2008, 'Pearson');
+
+-- Insert data into Reader table
+INSERT INTO Reader (UserID, Email, Address, FirstName, LastName, PhoneNo) VALUES
+(1, 'john@iba.com', '123 Elm Street', 'John', 'Doe', '555-1234'),
+(2, 'jane@iba.com', '456 Oak Avenue', 'Jane', 'Smith', '555-5678'),
+(3, 'bob@iba.com', '789 Maple Drive', 'Bob', 'Johnson', '555-9876'),
+(4, 'lisa@iba.com', '321 Pine Road', 'Lisa', 'Williams', '555-4321'),
+(5, 'mike@iba.com', '654 Cedar Lane', 'Mike', 'Brown', '555-8765'),
+(6, 'emily@iba.com', '987 Birch Blvd', 'Emily', 'Jones', '555-2109'),
+(7, 'alex@iba.com', '234 Walnut Avenue', 'Alex', 'Davis', '555-6789'),
+(8, 'sarah@iba.com', '876 Spruce Street', 'Sarah', 'Martinez', '555-3456'),
+(9, 'kevin@iba.com', '543 Oakwood Court', 'Kevin', 'Garcia', '555-9012'),
+(10, 'anna@iba.com', '678 Elmwood Drive', 'Anna', 'Rodriguez', '555-7890');
+
+-- Insert data into Auth_System table
+INSERT INTO Auth_System (LoginID, Password) VALUES
+(1, 'password1'),
+(2, 'password2'),
+(3, 'password3'),
+(4, 'password4'),
+(5, 'password5'),
+(6, 'password6'),
+(7, 'password7'),
+(8, 'password8'),
+(9, 'password9'),
+(10, 'password10');
+
+
+-- Insert data into Book table
+INSERT INTO Book (ISBN, AuthNo, Title, Edition, Category, Price, PublisherID) VALUES
+('9780143127550', 1, '1984', 1, 'Fiction', 10.99, 1),
+('9780061122415', 2, 'To Kill a Mockingbird', 2, 'Fiction', 12.50, 2),
+('9780307474278', 3, 'The Catcher in the Rye', 1, 'Fiction', 9.99, 3),
+('9780547928210', 4, 'The Hobbit', 3, 'Fantasy', 14.99, 1),
+('9780765326355', 5, 'A Game of Thrones', 1, 'Fantasy', 18.99, 2),
+('9780143127551', 6, 'Animal Farm', 2, 'Fiction', 11.99, 1),
+('9780061122416', 7, 'The Great Gatsby', 1, 'Fiction', 13.99, 2),
+('9780307474279', 8, 'Lord of the Flies', 3, 'Fiction', 10.49, 3),
+('9780547928211', 9, 'Harry Potter and the Sorcerer\'s Stone', 1, 'Fantasy', 17.49, 1),
+('9780765326356', 10, 'The Name of the Wind', 2, 'Fantasy', 16.49, 2);
+
+
+-- Insert data into Reports table
+INSERT INTO Reports (RegNo, UserID, BookISBN, IssueDate, ReturnDate) VALUES
+(1, 1, '9780143127550', '2024-04-01', '2024-04-15'),
+(2, 2, '9780061122415', '2024-04-05', '2024-04-20'),
+(3, 3, '9780307474278', '2024-04-10', '2024-04-25'),
+(4, 4, '9780547928210', '2024-04-15', '2024-04-30'),
+(5, 5, '9780765326355', '2024-04-20', '2024-05-05'),
+(6, 6, '9780143127550', '2024-04-25', '2024-05-10'),
+(7, 7, '9780061122415', '2024-05-01', NULL),
+(8, 8, '9780307474278', '2024-05-05', NULL),
+(9, 9, '9780547928210', '2024-05-10', NULL),
+(10, 10, '9780765326355', '2024-05-15', NULL);
+
+
+-- Insert data into Staff table
+INSERT INTO Staff (StaffID, Name) VALUES
+(1, 'Admin 1'),
+(2, 'Admin 2'),
+(3, 'Librarian'),
+(4, 'Clerk'),
+(5, 'Manager');
+
+
+-- Insert data into Staff_Reader table
+INSERT INTO Staff_Reader (StaffID, UserID) VALUES
+(1, 1),
+(2, 2),
+(3, 3),
+(4, 4),
+(5, 5);
+
+
+-- Insert data into Staff_Reports table
+INSERT INTO Staff_Reports (StaffID, RegNo) VALUES
+(1, 1),
+(2, 2),
+(3, 3),
+(4, 4),
+(5, 5);
+
+
+-- Insert data into Staff_Books table
+INSERT INTO Book (ISBN, AuthNo, Title, Edition, Category, Price, PublisherID) VALUES
+('9780143127550', 1, '1984', 1, 'Fiction', 10.99, 1),
+('9780061122415', 2, 'To Kill a Mockingbird', 2, 'Fiction', 12.50, 2),
+('9780307474278', 3, 'The Catcher in the Rye', 1, 'Fiction', 9.99, 3),
+('9780547928210', 4, 'The Hobbit', 3, 'Fantasy', 14.99, 1),
+('9780765326355', 5, 'A Game of Thrones', 1, 'Fantasy', 18.99, 2),
+('9780143127551', 6, 'Animal Farm', 2, 'Fiction', 11.99, 1),
+('9780061122416', 7, 'The Great Gatsby', 1, 'Fiction', 13.99, 2),
+('9780307474279', 8, 'Lord of the Flies', 3, 'Fiction', 10.49, 3),
+('9780547928211', 9, 'Harry Potter and the Sorcerer\'s Stone', 1, 'Fantasy', 17.49, 1),
+('9780765326356', 10, 'The Name of the Wind', 2, 'Fantasy', 16.49, 2);
+
+-- Insert data into Reserve_Return table
+INSERT INTO Reserve_Return (ReserveDate, DueDate, ReturnDate, UserID, ISBN) VALUES
+('2024-05-01', '2024-05-15', NULL, 1, '9780143127550'),
+('2024-05-05', '2024-05-20', NULL, 2, '9780061122415'),
+('2024-05-10', '2024-05-25', NULL, 3, '9780307474278'),
+('2024-05-15', '2024-05-30', NULL, 4, '9780547928210'),
+('2024-05-20', '2024-06-04', NULL, 5, '9780765326355'),
+('2024-05-25', '2024-06-09', NULL, 6, '9780143127550'),
+('2024-05-30', '2024-06-14', NULL, 7, '9780061122415'),
+('2024-06-04', '2024-06-19', NULL, 8, '9780307474278'),
+('2024-06-09', '2024-06-24', NULL, 9, '9780547928210'),
+('2024-06-14', '2024-06-29', NULL, 10, '9780765326355');
+

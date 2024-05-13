@@ -1,0 +1,455 @@
+1. **Procedure to select all books:**
+DELIMITER //
+
+CREATE PROCEDURE GetAllBooks()
+BEGIN
+    SELECT * FROM Book;
+END //
+
+DELIMITER ;
+
+mysql> call getallbooks;
++---------------+--------+---------------------------------------+---------+----------+----------+-------------+
+| ISBN          | AuthNo | Title                                 | Edition | Category | Price    | PublisherID |
++---------------+--------+---------------------------------------+---------+----------+----------+-------------+
+| 0987          |      2 | Pyambare Joseph                       |       2 | comics   | 10000.00 |           2 |
+| 0987654321    |      2 | Shaheed Abbas babaie                  |       2 | comics   |  2300.00 |           2 |
+| 1234567890    |      1 | Shaheed Nama                          |       1 | Fiction  |   100.00 |           1 |
+| 9780061122415 |      2 | To Kill a Mockingbird                 |       2 | Fiction  |   100.00 |           2 |
+| 9780061122416 |      7 | Love story                            |       1 | Fiction  |   100.99 |           2 |
+| 9780143127550 |      1 | Do you know                           |       1 | Fiction  |  8900.00 |           1 |
+| 9780143127551 |      6 | Animal Farm                           |       2 | Fiction  |   100.00 |           1 |
+| 9780307474278 |      3 | The Catcher in the Rye                |       1 | Fiction  |   100.00 |           3 |
+| 9780307474279 |      8 | Lord of the Flies                     |       3 | Fiction  |   100.00 |           3 |
+| 9780547928210 |      4 | The Hobbit                            |       3 | Fantasy  |  1899.00 |           1 |
+| 9780547928211 |      9 | Harry Potter and the Sorcerer's Stone |       1 | Fantasy  |  1899.00 |           1 |
+| 9780765326355 |      5 | A Game of Thrones                     |       1 | Fantasy  |    18.99 |           2 |
+| 9780765326356 |     10 | The Name of the Wind                  |       2 | Fantasy  |    16.49 |           2 |
++---------------+--------+---------------------------------------+---------+----------+----------+-------------+
+13 rows in set (0.00 sec)
+
+Query OK, 0 rows affected (0.10 sec)
+
+2. **Procedure to select all readers:**
+DELIMITER //
+
+CREATE PROCEDURE GetAllReaders()
+BEGIN
+    SELECT * FROM Reader;
+END //
+
+DELIMITER ;
+
+mysql> call GetAllReaders;
++--------+---------------+-------------------+-----------+-----------+----------+
+| UserID | Email         | Address           | FirstName | LastName  | PhoneNo  |
++--------+---------------+-------------------+-----------+-----------+----------+
+|      1 | john@iba.com  | 123 Elm Street    | John      | Doe       | 555-1234 |
+|      2 | jane@iba.com  | 456 Oak Avenue    | Jane      | Smith     | 555-5678 |
+|      3 | bob@iba.com   | 789 Maple Drive   | Bob       | Johnson   | 555-9876 |
+|      4 | lisa@iba.com  | 321 Pine Road     | Lisa      | Williams  | 555-4321 |
+|      5 | mike@iba.com  | 654 Cedar Lane    | Mike      | Brown     | 555-8765 |
+|      6 | emily@iba.com | 987 Birch Blvd    | Emily     | Jones     | 555-2109 |
+|      7 | alex@iba.com  | 234 Walnut Avenue | Alex      | Davis     | 555-6789 |
+|      8 | sarah@iba.com | 876 Spruce Street | Sarah     | Martinez  | 555-3456 |
+|      9 | kevin@iba.com | 543 Oakwood Court | Kevin     | Garcia    | 555-9012 |
+|     10 | anna@iba.com  | 678 Elmwood Drive | Anna      | Rodriguez | 555-7890 |
++--------+---------------+-------------------+-----------+-----------+----------+
+10 rows in set (0.02 sec)
+
+Query OK, 0 rows affected (0.05 sec)
+
+3. **Procedure to select all publishers:**
+DELIMITER //
+
+CREATE PROCEDURE GetAllPublishers()
+BEGIN
+    SELECT * FROM Publisher;
+END //
+
+DELIMITER ;
+
+mysql> call GetAllPublishers;
++-------------+-------------------+-----------------------+
+| PublisherID | YearOfPublication | publisher_Name        |
++-------------+-------------------+-----------------------+
+|           1 |              2005 | raza                  |
+|           2 |              2010 | Hadi                  |
+|           3 |              2018 | john                  |
+|           4 |              2015 | Paras                 |
+|           5 |              2009 | Wildan                |
+|           6 |              2013 | Macmillan Publishers  |
+|           7 |              2011 | Hashim                |
+|           8 |              2017 | Saad                  |
+|           9 |              2019 | Bloomsbury Publishing |
+|          10 |              2008 | Pearson               |
++-------------+-------------------+-----------------------+
+10 rows in set (0.00 sec)
+
+Query OK, 0 rows affected (0.04 sec)
+
+4. **Procedure to select all reports of books borrowed:**
+DELIMITER //
+
+CREATE PROCEDURE GetAllBorrowedBooks()
+BEGIN
+    SELECT * FROM Reports;
+END //
+
+DELIMITER ;
+
+mysql> call GetAllBorrowedBooks;
++-------+--------+---------------+------------+------------+
+| RegNo | UserID | BookISBN      | IssueDate  | ReturnDate |
++-------+--------+---------------+------------+------------+
+|     1 |      1 | 9780143127550 | 2024-04-01 | 2024-04-15 |
+|     2 |      2 | 9780061122415 | 2024-04-05 | 2024-04-20 |
+|     3 |      3 | 9780307474278 | 2024-04-10 | 2024-04-25 |
+|     4 |      4 | 9780547928210 | 2024-04-15 | 2024-04-30 |
+|     5 |      5 | 9780765326355 | 2024-04-20 | 2024-05-05 |
+|     6 |      6 | 9780143127550 | 2024-04-25 | 2024-05-10 |
+|     7 |      7 | 9780061122415 | 2024-05-01 | NULL       |
+|     8 |      8 | 9780307474278 | 2024-05-05 | NULL       |
+|     9 |      9 | 9780547928210 | 2024-05-10 | NULL       |
+|    10 |     10 | 9780765326355 | 2024-05-15 | NULL       |
++-------+--------+---------------+------------+------------+
+10 rows in set (0.00 sec)
+
+Query OK, 0 rows affected (0.03 sec)
+
+5. **Procedure to select all staff members:**
+DELIMITER //
+
+CREATE PROCEDURE GetAllStaff()
+BEGIN
+    SELECT * FROM Staff;
+END //
+
+DELIMITER ;
+
+mysql> call GetAllStaff;
++---------+-----------+
+| StaffID | Name      |
++---------+-----------+
+|       1 | Admin 1   |
+|       2 | Admin 2   |
+|       3 | Librarian |
+|       4 | Clerk     |
+|       5 | Manager   |
++---------+-----------+
+5 rows in set (0.00 sec)
+
+Query OK, 0 rows affected (0.06 sec)
+
+
+6. **Procedure to select all reservations made by readers:**
+
+DELIMITER //
+
+CREATE PROCEDURE GetAllReservations()
+BEGIN
+    SELECT * FROM Reserve_Return;
+END //
+
+DELIMITER ;
+
+mysql> call GetAllReservations;
++-------------+------------+------------+--------+---------------+
+| ReserveDate | DueDate    | ReturnDate | UserID | ISBN          |
++-------------+------------+------------+--------+---------------+
+| 2024-05-01  | 2024-05-15 | NULL       |      1 | 9780143127550 |
+| 2024-05-05  | 2024-05-20 | NULL       |      2 | 9780061122415 |
+| 2024-05-10  | 2024-05-25 | NULL       |      3 | 9780307474278 |
+| 2024-05-15  | 2024-05-30 | NULL       |      4 | 9780547928210 |
+| 2024-05-20  | 2024-06-04 | NULL       |      5 | 9780765326355 |
+| 2024-05-25  | 2024-06-09 | NULL       |      6 | 9780143127550 |
+| 2024-05-30  | 2024-06-14 | NULL       |      7 | 9780061122415 |
+| 2024-06-04  | 2024-06-19 | NULL       |      8 | 9780307474278 |
+| 2024-06-09  | 2024-06-24 | NULL       |      9 | 9780547928210 |
+| 2024-06-14  | 2024-06-29 | NULL       |     10 | 9780765326355 |
++-------------+------------+------------+--------+---------------+
+10 rows in set (0.00 sec)
+
+Query OK, 0 rows affected (0.04 sec)
+
+
+7. **Procedure to select the number of books published each year:**
+
+DELIMITER //
+
+CREATE PROCEDURE GetBooksPerYear()
+BEGIN
+    SELECT YearOfPublication, COUNT(*) AS NumberOfBooks
+    FROM Publisher
+    GROUP BY YearOfPublication;
+END //
+
+DELIMITER ;
+mysql> call GetBooksPerYear;
++-------------------+---------------+
+| YearOfPublication | NumberOfBooks |
++-------------------+---------------+
+|              2005 |             1 |
+|              2010 |             1 |
+|              2018 |             1 |
+|              2015 |             1 |
+|              2009 |             1 |
+|              2013 |             1 |
+|              2011 |             1 |
+|              2017 |             1 |
+|              2019 |             1 |
+|              2008 |             1 |
++-------------------+---------------+
+10 rows in set (0.00 sec)
+
+Query OK, 0 rows affected (0.03 sec)
+
+
+8. procedure to select expensive books
+DELIMITER //
+
+CREATE PROCEDURE GetExpensiveBooks()
+BEGIN
+    DECLARE maxPrice DECIMAL(10,2);
+    
+    -- Find the maximum price
+    SELECT MAX(Price) INTO maxPrice FROM Book;
+    
+    -- Select books with prices greater than the maximum
+    SELECT * FROM Book
+    WHERE Price = maxPrice;
+END //
+
+DELIMITER ;
+mysql> call GetExpensiveBooks;
++---------------+--------+-------------+---------+----------+---------+-------------+
+| ISBN          | AuthNo | Title       | Edition | Category | Price   | PublisherID |
++---------------+--------+-------------+---------+----------+---------+-------------+
+| 9780143127550 |      1 | Do you know |       1 | Fiction  | 8900.00 |           1 |
++---------------+--------+-------------+---------+----------+---------+-------------+
+1 row in set (0.00 sec)
+
+Query OK, 0 rows affected (0.01 sec)
+
+
+9. **Procedure to select readers who have borrowed books:**
+
+DELIMITER //
+
+CREATE PROCEDURE GetBorrowingReaders()
+BEGIN
+    SELECT DISTINCT r.*
+    FROM Reader r
+    INNER JOIN Reports rp ON r.UserID = rp.UserID;
+END //
+
+DELIMITER ;
+mysql> call GetBorrowingReaders;
++--------+---------------+-------------------+-----------+-----------+----------+
+| UserID | Email         | Address           | FirstName | LastName  | PhoneNo  |
++--------+---------------+-------------------+-----------+-----------+----------+
+|      1 | john@iba.com  | 123 Elm Street    | John      | Doe       | 555-1234 |
+|      2 | jane@iba.com  | 456 Oak Avenue    | Jane      | Smith     | 555-5678 |
+|      3 | bob@iba.com   | 789 Maple Drive   | Bob       | Johnson   | 555-9876 |
+|      4 | lisa@iba.com  | 321 Pine Road     | Lisa      | Williams  | 555-4321 |
+|      5 | mike@iba.com  | 654 Cedar Lane    | Mike      | Brown     | 555-8765 |
+|      6 | emily@iba.com | 987 Birch Blvd    | Emily     | Jones     | 555-2109 |
+|      7 | alex@iba.com  | 234 Walnut Avenue | Alex      | Davis     | 555-6789 |
+|      8 | sarah@iba.com | 876 Spruce Street | Sarah     | Martinez  | 555-3456 |
+|      9 | kevin@iba.com | 543 Oakwood Court | Kevin     | Garcia    | 555-9012 |
+|     10 | anna@iba.com  | 678 Elmwood Drive | Anna      | Rodriguez | 555-7890 |
++--------+---------------+-------------------+-----------+-----------+----------+
+10 rows in set (0.00 sec)
+
+Query OK, 0 rows affected (0.04 sec)
+
+10. **Procedure to select staff members who have borrowed books:**
+
+DELIMITER //
+
+CREATE PROCEDURE GetBorrowingStaff()
+BEGIN
+    SELECT DISTINCT s.*
+    FROM Staff s
+    INNER JOIN Staff_Reports sr ON s.StaffID = sr.StaffID;
+END //
+
+DELIMITER ;
+
+mysql> call GetBorrowingStaff;
++---------+-----------+
+| StaffID | Name      |
++---------+-----------+
+|       1 | Admin 1   |
+|       2 | Admin 2   |
+|       3 | Librarian |
+|       4 | Clerk     |
+|       5 | Manager   |
++---------+-----------+
+5 rows in set (0.00 sec)
+
+Query OK, 0 rows affected (0.01 sec)
+
+
+11. **Procedure to insert a new book:**
+
+DELIMITER //
+
+CREATE PROCEDURE InsertBook(
+    IN isbn VARCHAR(20),
+    IN authNo INT,
+    IN title VARCHAR(255),
+    IN edition INT,
+    IN category VARCHAR(100),
+    IN price DECIMAL(10, 2),
+    IN publisherID INT
+)
+BEGIN
+    INSERT INTO Book (ISBN, AuthNo, Title, Edition, Category, Price, PublisherID)
+    VALUES (isbn, authNo, title, edition, category, price, publisherID);
+END //
+
+DELIMITER ;
+
+mysql> CALL InsertBook('0234567890', 1, 'Big data', 3, 'Academic', 230.78, 10);
+Query OK, 1 row affected (0.16 sec)
+
+mysql> call getallbooks;
++---------------+--------+---------------------------------------+---------+----------+---------+-------------+
+| ISBN          | AuthNo | Title                                 | Edition | Category | Price   | PublisherID |
++---------------+--------+---------------------------------------+---------+----------+---------+-------------+
+| 0234567890    |      1 | Big data                              |       3 | Academic |  230.78 |          10 |
+| 0987654321    |      2 | Shaheed Abbas babaie                  |       2 | comics   | 2300.00 |           2 |
+| 1234567890    |      1 | Shaheed Nama                          |       1 | Fiction  |  100.00 |           1 |
+| 9780061122415 |      2 | To Kill a Mockingbird                 |       2 | Fiction  |  100.00 |           2 |
+| 9780061122416 |      7 | Love story                            |       1 | Fiction  |  100.99 |           2 |
+| 9780143127550 |      1 | Do you know                           |       1 | Fiction  | 8900.00 |           1 |
+| 9780143127551 |      6 | Animal Farm                           |       2 | Fiction  |  100.00 |           1 |
+| 9780307474278 |      3 | The Catcher in the Rye                |       1 | Fiction  |  100.00 |           3 |
+| 9780307474279 |      8 | Lord of the Flies                     |       3 | Fiction  |  100.00 |           3 |
+| 9780547928210 |      4 | The Hobbit                            |       3 | Fantasy  | 1899.00 |           1 |
+| 9780547928211 |      9 | Harry Potter and the Sorcerer's Stone |       1 | Fantasy  | 1899.00 |           1 |
+| 9780765326355 |      5 | A Game of Thrones                     |       1 | Fantasy  |   18.99 |           2 |
+| 9780765326356 |     10 | The Name of the Wind                  |       2 | Fantasy  |   16.49 |           2 |
++---------------+--------+---------------------------------------+---------+----------+---------+-------------+
+13 rows in set (0.00 sec)
+
+12. **Procedure to update bookdetails
+DELIMITER //
+
+CREATE PROCEDURE updatebookdetails(
+    IN isbnToUpdate VARCHAR(20),
+    IN newTitle VARCHAR(255),
+    IN newPrice DECIMAL(10, 2)
+)
+BEGIN
+    UPDATE Book
+    SET Title = newTitle, Price = newPrice
+    WHERE ISBN = isbnToUpdate;
+END //
+
+DELIMITER ;
+
+mysql> call getallbooks;
++---------------+--------+--------------------------+---------+----------+---------+-------------+
+| ISBN          | AuthNo | Title                    | Edition | Category | Price   | PublisherID |
++---------------+--------+--------------------------+---------+----------+---------+-------------+
+| 0234567890    |      1 | journey with Tayyaba     |       3 | Academic |   29.99 |          10 |
+| 0987654321    |      2 | C++                      |       2 | comics   |   30.00 |           2 |
+| 1234567890    |      1 | Five minutes engineering |       1 | Fiction  | 2999.00 |           1 |
+| 9780061122415 |      2 | journey with Tayyaba     |       2 | Fiction  |   29.99 |           2 |
+| 9780061122416 |      7 | journey with Tayyaba     |       1 | Fiction  |   29.99 |           2 |
+| 9780143127550 |      1 | journey with Tayyaba     |       1 | Fiction  |   29.99 |           1 |
+| 9780143127551 |      6 | journey with Tayyaba     |       2 | Fiction  |   29.99 |           1 |
+| 9780307474278 |      3 | journey with Tayyaba     |       1 | Fiction  |   29.99 |           3 |
+| 9780307474279 |      8 | journey with Tayyaba     |       3 | Fiction  |   29.99 |           3 |
+| 9780547928210 |      4 | Do you know              |       3 | Fantasy  |  230.00 |           1 |
+| 9780547928211 |      9 | journey with Tayyaba     |       1 | Fantasy  |   29.99 |           1 |
+| 9780765326355 |      5 | journey with Tayyaba     |       1 | Fantasy  |   29.99 |           2 |
+| 9780765326356 |     10 | Life Goals               |       2 | Fantasy  |   29.99 |           2 |
++---------------+--------+--------------------------+---------+----------+---------+-------------+
+13 rows in set (0.00 sec)
+
+Query OK, 0 rows affected (0.07 sec)
+
+13. **Procedure to delete a book:**
+
+DELIMITER //
+
+CREATE PROCEDURE DeleteBook(
+    IN isbnToDelete VARCHAR(20)
+)
+BEGIN
+    DELETE FROM Book
+    WHERE ISBN = isbnToDelete;
+END //
+
+DELIMITER ;
+
+mysql> call DeleteBook("9780307474279");
+Query OK, 1 row affected (0.06 sec)
+
+mysql> call getallbooks;
++---------------+--------+--------------------------+---------+----------+---------+-------------+
+| ISBN          | AuthNo | Title                    | Edition | Category | Price   | PublisherID |
++---------------+--------+--------------------------+---------+----------+---------+-------------+
+| 0234567890    |      1 | journey with Tayyaba     |       3 | Academic |   29.99 |          10 |
+| 0987654321    |      2 | C++                      |       2 | comics   |   30.00 |           2 |
+| 1234567890    |      1 | Five minutes engineering |       1 | Fiction  | 2999.00 |           1 |
+| 9780061122415 |      2 | journey with Tayyaba     |       2 | Fiction  |   29.99 |           2 |
+| 9780061122416 |      7 | journey with Tayyaba     |       1 | Fiction  |   29.99 |           2 |
+| 9780143127550 |      1 | journey with Tayyaba     |       1 | Fiction  |   29.99 |           1 |
+| 9780143127551 |      6 | journey with Tayyaba     |       2 | Fiction  |   29.99 |           1 |
+| 9780307474278 |      3 | journey with Tayyaba     |       1 | Fiction  |   29.99 |           3 |
+| 9780547928210 |      4 | Do you know              |       3 | Fantasy  |  230.00 |           1 |
+| 9780547928211 |      9 | journey with Tayyaba     |       1 | Fantasy  |   29.99 |           1 |
+| 9780765326355 |      5 | journey with Tayyaba     |       1 | Fantasy  |   29.99 |           2 |
+| 9780765326356 |     10 | Life Goals               |       2 | Fantasy  |   29.99 |           2 |
++---------------+--------+--------------------------+---------+----------+---------+-------------+
+12 rows in set (0.00 sec)
+
+Query OK, 0 rows affected (0.07 sec)
+
+14. **Procedure to search for books by title:**
+
+DELIMITER //
+
+CREATE PROCEDURE SearchBooksByTitle(
+    IN searchTitle VARCHAR(255)
+)
+BEGIN
+    SELECT * FROM Book
+    WHERE Title LIKE CONCAT('%', searchTitle, '%');
+END //
+
+DELIMITER ;
+
+mysql> call SearchBooksByTitle("journey with Tayyaba");
++---------------+--------+----------------------+---------+----------+-------+-------------+
+| ISBN          | AuthNo | Title                | Edition | Category | Price | PublisherID |
++---------------+--------+----------------------+---------+----------+-------+-------------+
+| 0234567890    |      1 | journey with Tayyaba |       3 | Academic | 29.99 |          10 |
+| 9780061122415 |      2 | journey with Tayyaba |       2 | Fiction  | 29.99 |           2 |
+| 9780061122416 |      7 | journey with Tayyaba |       1 | Fiction  | 29.99 |           2 |
+| 9780143127550 |      1 | journey with Tayyaba |       1 | Fiction  | 29.99 |           1 |
+| 9780143127551 |      6 | journey with Tayyaba |       2 | Fiction  | 29.99 |           1 |
+| 9780307474278 |      3 | journey with Tayyaba |       1 | Fiction  | 29.99 |           3 |
+| 9780547928211 |      9 | journey with Tayyaba |       1 | Fantasy  | 29.99 |           1 |
+| 9780765326355 |      5 | journey with Tayyaba |       1 | Fantasy  | 29.99 |           2 |
++---------------+--------+----------------------+---------+----------+-------+-------------+
+8 rows in set (0.00 sec)
+
+Query OK, 0 rows affected (0.04 sec)
+
+
+15. **Procedure to get overdue books:**
+
+DELIMITER //
+
+CREATE PROCEDURE GetOverdueBooks()
+BEGIN
+    SELECT * FROM Reserve_Return
+    WHERE DueDate < CURDATE() AND ReturnDate IS NULL;
+END //
+
+DELIMITER ;
